@@ -4,7 +4,7 @@
 //   counterWord,
 //   counterUniqueWord,
 // } from "./modules.js";
-// с таким импортом работает только через live server
+// с таким импортом работает только через live server.
 
 // 1.1
 alert(`Готово!\n\n${ucFirst(
