@@ -1,0 +1,149 @@
+Строки
+
+Спецсимволы
+
+Символ	Описание
+\n	Перевод строки
+\r	В текстовых файлах Windows для перевода строки используется комбинация символов \r\n, а на других ОС это просто \n. Это так по историческим причинам, ПО под Windows обычно понимает и просто \n.
+\', \"	Кавычки
+\\	Обратный слеш
+\t	Знак табуляции
+\b, \f, \v	Backspace, Form Feed и Vertical Tab — оставлены для обратной совместимости, сейчас не используются.
+
+Длина строки
+
+Свойство length содержит длину строки:
+
+ alert( `My\n`.length ); // 3
+
+Доступ к символам
+
+Получить символ, который занимает позицию pos, можно с помощью квадратных скобок: [pos]. Также можно использовать метод str.at(pos). Первый символ занимает нулевую позицию:
+
+ let str = `Hello`;
+
+// получаем первый символ
+alert( str[0] ); // H
+alert( str.at(0) ); // H
+
+// получаем последний символ
+alert( str[str.length - 1] ); // o
+alert( str.at(-1) );
+
+
+Изменение регистра
+
+Методы toLowerCase() и toUpperCase() меняют регистр символов:
+
+ alert( 'Interface'.toUpperCase() ); // INTERFACE
+alert( 'Interface'.toLowerCase() ); // interface
+
+Поиск подстроки
+
+str.indexOf
+
+Первый метод — str.indexOf(substr, pos).
+
+let str = 'Widget with id';
+
+alert( str.indexOf('Widget') ); // 0, потому что подстрока 'Widget' найдена в начале
+alert( str.indexOf('widget') ); // -1, совпадений нет, поиск чувствителен к регистру
+
+alert( str.indexOf("id") ); // 1, подстрока "id" найдена на позиции 1 (..idget with id)
+
+includes, startsWith, endsWith
+
+Более современный метод str.includes(substr, pos) возвращает true, если в строке str есть подстрока substr, либо false, если нет.
+
+alert( "Widget with id".includes("Widget") ); // true
+
+alert( "Hello".includes("Bye") ); // false
+
+alert( "Midget".includes("id") ); // true
+alert( "Midget".includes("id", 3) ); // false, поиск начат с позиции 3
+
+alert( "Widget".startsWith("Wid") ); // true, "Wid" — начало "Widget"
+alert( "Widget".endsWith("get") ); // true, "get" — окончание "Widget"
+
+Получение подстроки
+
+str.slice(start [, end])
+
+let str = "stringify";
+// 'strin', символы от 0 до 5 (не включая 5)
+alert( str.slice(0, 5) );
+// 's', от 0 до 1, не включая 1, т. е. только один символ на позиции 0
+alert( str.slice(0, 1) );
+
+let str = "stringify";
+alert( str.slice(2) ); // ringify, с позиции 2 и до конца
+
+str.substring(start [, end])
+
+let str = "stringify";
+
+// для substring эти два примера — одинаковы
+alert( str.substring(2, 6) ); // "ring"
+alert( str.substring(6, 2) ); // "ring"
+
+// …но не для slice:
+alert( str.slice(2, 6) ); // "ring" (то же самое)
+alert( str.slice(6, 2) ); // "" (пустая строка)
+
+str.substr(start [, length])
+
+let str = "stringify";
+// ring, получаем 4 символа, начиная с позиции 2
+alert( str.substr(2, 4) );
+
+let str = "stringify";
+// gi, получаем 2 символа, начиная с позиции 4 с конца строки
+alert( str.substr(-4, 2) );
+
+
+метод	выбирает…	отрицательные значения
+slice(start, end)	от start до end (не включая end)	можно передавать отрицательные значения
+substring(start, end)	между start и end	отрицательные значения равнозначны 0
+substr(start, length)	length символов, начиная от start	значение start может быть отрицательным
+
+
+Сравнение строк
+
+str.codePointAt(pos)
+Возвращает код для символа, находящегося на позиции pos:
+
+// одна и та же буква в нижнем и верхнем регистре
+// будет иметь разные коды
+alert( "z".codePointAt(0) ); // 122
+alert( "Z".codePointAt(0) ); // 90
+
+String.fromCodePoint(code)
+Создаёт символ по его коду code
+
+ alert( String.fromCodePoint(90) ); // Z
+
+let str = '';
+
+for (let i = 65; i <= 220; i++) {
+  str += String.fromCodePoint(i);
+}
+alert( str );
+// ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+// ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜ
+
+Итого
+
+Есть три типа кавычек. Строки, использующие обратные кавычки, могут занимать более одной строки в коде и включать выражения ${…}.
+Строки в JavaScript кодируются в UTF-16.
+Есть специальные символы, такие как разрыв строки \n.
+Для получения символа используйте [] или метод at.
+Для получения подстроки используйте slice или substring.
+Для того, чтобы перевести строку в нижний или верхний регистр, используйте toLowerCase/toUpperCase.
+Для поиска подстроки используйте indexOf или includes/startsWith/endsWith, когда надо только проверить, есть ли вхождение.
+Чтобы сравнить строки с учётом правил языка, используйте localeCompare.
+Строки также имеют ещё кое-какие полезные методы:
+
+str.trim() — убирает пробелы в начале и конце строки.
+str.repeat(n) — повторяет строку n раз.
+
+
