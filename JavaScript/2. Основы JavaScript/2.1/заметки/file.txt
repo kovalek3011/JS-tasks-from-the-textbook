@@ -1,0 +1,42 @@
+Привет, мир!
+
+Тег «script»
+
+<!DOCTYPE HTML>
+<html>
+
+<body>
+
+  <p>Перед скриптом...</p>
+
+  <script>
+    alert( 'Привет, мир!' );
+  </script>
+
+  <p>...После скрипта.</p>
+
+</body>
+
+</html>
+
+--
+
+Внешние скрипты
+
+<script src="/path/to/script.js"></script>
+
+--
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js"></script>
+
+--
+
+Если атрибут src установлен, содержимое тега script будет игнорироваться.
+
+--
+
+Итого
+
+Для добавления кода JavaScript на страницу используется тег <script>
+Атрибуты type и language необязательны.
+Скрипт во внешнем файле можно вставить с помощью <script src="path/to/script.js"></script>.
